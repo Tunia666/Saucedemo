@@ -48,7 +48,10 @@ public class LoginTest {
     @Test
     public void checkNegativeLoginTest() {
         driver.get("https://www.saucedemo.com/");
-        String username = "Username";//неверный login
+        // извлечение негатив_логина
+        String loginText = driver.findElement(By.id("login_credentials")).getText();
+        String[] loginElements = loginText.split("\\n");//добавление элемента строки в массив
+        String username = loginElements[2].trim();//извлечение элемента
         // извлечение пароля
         String passwordText = driver.findElement(By.xpath("//*[@id='root']/div/div[2]/div[2]/div/div[2]")).getText();
         String password = passwordText.split(":")[1].trim();
@@ -59,7 +62,7 @@ public class LoginTest {
         passwordField.sendKeys(password);
         driver.findElement(By.id("login-button")).click();
         String errorMassage = driver.findElement(By.xpath("//*[@id=\"login_button_container\"]/div/form/div[3]/h3")).getText();
-        Assert.assertEquals(errorMassage, "Epic sadface: Username and password do not match any user in this service");
+        Assert.assertEquals(errorMassage, "Epic sadface: Sorry, this user has been locked out.");
     }
 
     @Test
