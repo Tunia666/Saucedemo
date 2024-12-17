@@ -23,29 +23,29 @@ public class ProductsPage {
         return driver.findElement(title).getText();
     }
 
-    public void AddBackpack() {
+    public void addBackpack() {
         driver.findElement(buttonBackpack).click();
     }
 
-    public void AddLight() {
+    public void addLight() {
         driver.findElement(buttonLight).click();
     }
 
-    public void AddTShirt() {
+    public void addTShirt() {
         driver.findElement(productCarTShirt).click();
         driver.findElement(addToCart).click();
         //Shopping();
     }
 
-    public String CountProducts() {
+    public String countProducts() {
         return driver.findElement(countPoductsShoppingCart).getText();
     }
 
-    public void Shopping() {
+    public void shopping() {
         driver.findElement(shoppingCart).click();
     }
 
-    public void RemoveTShirt() {
+    public void removeTShirt() {
         driver.findElement(removeTShirt).click();
     }
 }

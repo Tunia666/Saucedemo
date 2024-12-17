@@ -8,25 +8,25 @@ public class ProductsTest extends BaseTest {
 
 
     @Test
-    public void CheckAdditionProductToShoppingCart() {
+    public void checkAdditionProductToShoppingCart() {
         loginPage.open();
         loginPage.login("standard_user", "secret_sauce");
-        productsPage.AddBackpack();
-        productsPage.AddLight();
-        productsPage.AddTShirt();
-        productsPage.Shopping();
-        assertEquals(productsPage.CountProducts(), "3", "Количество товара не равно 3м");
+        productsPage.addBackpack();
+        productsPage.addLight();
+        productsPage.addTShirt();
+        productsPage.shopping();
+        assertEquals(productsPage.countProducts(), "3", "Количество товара не равно 3м");
     }
 
     @Test
-    public void CheckRemovalItemFromShoppingCart() {
+    public void checkRemovalItemFromShoppingCart() {
         loginPage.open();
         loginPage.login("standard_user", "secret_sauce");
-        productsPage.AddBackpack();
-        productsPage.AddLight();
-        productsPage.AddTShirt();
-        productsPage.Shopping();
-        productsPage.RemoveTShirt();
-        assertEquals(productsPage.CountProducts(), "2", "Количество товара не равно 2м");
+        productsPage.addBackpack();
+        productsPage.addLight();
+        productsPage.addTShirt();
+        productsPage.shopping();
+        productsPage.removeTShirt();
+        assertEquals(productsPage.countProducts(), "2", "Количество товара не равно 2м");
     }
 }
