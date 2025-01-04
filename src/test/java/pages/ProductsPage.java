@@ -2,18 +2,23 @@ package pages;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.Select;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class ProductsPage {
     WebDriver driver;
 
     By title = By.cssSelector("[data-test=title]");
-    By buttonBackpack = By.cssSelector("[data-test=add-to-cart-sauce-labs-backpack]");
-    By buttonLight = By.cssSelector("[data-test=add-to-cart-sauce-labs-bike-light]");
-    By productCarTShirt = By.id("item_1_title_link");
-    By addToCart = By.id("add-to-cart");
-    By shoppingCart = By.cssSelector("[data-test=shopping-cart-link]");
+    String productPage = "//div[text()='%s']";
+    String addToCartPattern = "//div[text()='%s']//ancestor::div[@class='inventory_item']//button";
+    String addToCartInPage = "//div[text()='%s']//ancestor::div[@class='inventory_details']//button";
     By countPoductsShoppingCart = By.cssSelector("[data-test=shopping-cart-link]");
-    By removeTShirt = By.cssSelector("[data-test=remove-sauce-labs-bolt-t-shirt]");
+    String removeProductPage = "//div[text()='%s']//ancestor::div[@class='inventory_item']//button";
+    String removeCar = "//div[text()='%s']//ancestor::div[@class='cart_item']//button";
+    By shoppingCart = By.cssSelector("[data-test=shopping-cart-link]");
 
     public ProductsPage(WebDriver driver) {
         this.driver = driver;
@@ -23,29 +28,36 @@ public class ProductsPage {
         return driver.findElement(title).getText();
     }
 
-    public void addBackpack() {
-        driver.findElement(buttonBackpack).click();
-    }
-
-    public void addLight() {
-        driver.findElement(buttonLight).click();
-    }
-
-    public void addTShirt() {
-        driver.findElement(productCarTShirt).click();
-        driver.findElement(addToCart).click();
-        //Shopping();
+    public void addToCart(String product) {
+        driver.findElement(By.xpath(String.format(addToCartPattern, product))).click();
     }
 
     public String countProducts() {
         return driver.findElement(countPoductsShoppingCart).getText();
     }
 
+    //переход в корзину
     public void shopping() {
         driver.findElement(shoppingCart).click();
     }
 
-    public void removeTShirt() {
-        driver.findElement(removeTShirt).click();
+    //добавление из списка продуктов
+    public void addToCartInProductPage(String product) {
+        driver.findElement(By.xpath(String.format(addToCartInPage, product))).click();
+    }
+
+    //удаление продукта из списка
+    public void removeProduct(String product) {
+        driver.findElement(By.xpath(String.format(removeProductPage, product))).click();
+    }
+
+    //удаление из корзины
+    public void removeProductCar(String product) {
+        driver.findElement(By.xpath(String.format(removeCar, product))).click();
+    }
+
+    //переход на страницу продукта
+    public void goToProductPage(String product) {
+        driver.findElement(By.xpath(String.format(productPage, product))).click();
     }
 }

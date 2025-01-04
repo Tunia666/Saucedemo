@@ -6,9 +6,9 @@ import org.openqa.selenium.WebDriver;
 public class LoginPage {
     WebDriver driver;
 
-    By userField = By.id("user-name");
-    By passwordField = By.id("password");
-    By loginButton = By.id("login-button");
+    By userField = By.cssSelector("[data-test='username']");
+    By passwordField = By.cssSelector("[data-test='password']");
+    By loginButton = By.cssSelector("[data-test='login-button']");
     By errorMassage = By.cssSelector("[data-test=error]");
 
     public LoginPage(WebDriver driver) {
@@ -28,4 +28,5 @@ public class LoginPage {
     public String getErrorMassage() {
         return driver.findElement(errorMassage).getText();
     }
+
 }
