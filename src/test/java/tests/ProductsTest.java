@@ -1,6 +1,10 @@
 package tests;
 
+import io.qameta.allure.*;
+import jdk.jfr.Description;
 import org.testng.annotations.Test;
+
+import javax.management.Descriptor;
 
 import static org.testng.Assert.assertEquals;
 
@@ -39,7 +43,16 @@ public class ProductsTest extends BaseTest {
         assertEquals(productsPage.countProducts(), "1", "Количество товара не равно 2м");
     }
 
-    @Test
+    @Test (testName = "Проверка удаления товара из корзины")
+    @Description("Проверка удаления товара из корзины") //аннотация
+    @Severity(SeverityLevel.CRITICAL)//уровень теста
+    @Epic("Sausedemo-1.0")//
+    @Feature("Cart in Sausedemo")
+    @Story("Удаление товара из корзины")
+    @TmsLink("www.jira.com/ITM-3")
+    @Issue("www.jira.com/ITM-4")
+    @Flaky//если тест нестабильный
+
     public void checkRemoveProductFormCart() {
         loginPage.open();
         loginPage.login("standard_user", "secret_sauce");
