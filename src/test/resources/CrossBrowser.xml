@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite thread-count="3" name="Saucedemo SmokeTest" parallel="classes">
+    <listeners>
+        <listener class-name="tests.TestListener"/>
+        <listener class-name="tests.AnnotationTransformer"/>
+    </listeners>
+    <test name="Chrome">
+        <classes>
+            <class name="tests.LoginTest"/>
+            <class name="tests.LoginTest">
+                <methods>
+                    <include name="checkingLoginWithCorrectUsernameAndPassword"></include>
+                    <exclude name="checkingLoginWithCorrectUsernameAndPassword"></exclude>
+                </methods>
+            </class>
+            <class name="tests.ProductsTest"/>
+            <parameter name="browser" value="chrome"/>
+        </classes>
+    </test> <!-- Test -->
+    <test name="FirefoxTest1">
+        <classes>
+            <class name="tests.LoginTest"/>
+            <class name="tests.ProductsTest"/>
+            <parameter name="browser" value="firefox"/>
+        </classes>
+    </test> <!-- Test -->
+    <test name="FirefoxTest2">
+        <groups>
+            <run>
+                <include name="smoke"/>
+            </run>
+        </groups>
+    </test> <!-- Test -->
+</suite>

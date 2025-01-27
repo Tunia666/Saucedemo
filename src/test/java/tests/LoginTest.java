@@ -1,13 +1,14 @@
 package tests;
 
+import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
 import static org.testng.Assert.assertEquals;
 
 public class LoginTest extends BaseTest {
 
-
-    @Test
+    @Test(testName = "Проверка корректного логина и пароля", description = "Тестирование корректного логина или пароля",
+            retryAnalyzer = Retry.class, groups = {"smoke"},alwaysRun = true)
     public void checkingLoginWithCorrectUsernameAndPassword() {
         loginPage.open();
         loginPage.login("standard_user", "secret_sauce");
@@ -16,21 +17,20 @@ public class LoginTest extends BaseTest {
                 "Логин не выполнен");
     }
 
-    @Test
-    public void checkLoginWithWrongPassword() {
-        loginPage.open();
-        loginPage.login("standard_user", "12345");
-        assertEquals(loginPage.getErrorMassage(),
-                "Epic sadface: Username and password do not match any user in this service",
-                "Сообщение об ошибке не появилось");
+    @DataProvider(name = "LoginData")
+    public Object[][] loginData() {
+        return new Object[][]{
+                {"standard_user", "12345", "Epic sadface: Username and password do not match any user in this service"},
+                {"name_user", "secret_sauce", "Epic sadface: Username and password do not match any user in this service"},
+        };
     }
-
-    @Test
-    public void checkLoginWithWrongUsername() {
+    @Test(testName = "Проверка негативного логина и пароля", description = "Тестирование некорректного логина или пароля",
+            retryAnalyzer = Retry.class, groups = {"smoke"},alwaysRun = true, dataProvider = "LoginData")
+    public void checkNegativLogin(String user, String password, String message) {
         loginPage.open();
-        loginPage.login("name_user", "secret_sauce");
+        loginPage.login(user, password);
         assertEquals(loginPage.getErrorMassage(),
-                "Epic sadface: Username and password do not match any user in this service",
+                message,
                 "Сообщение об ошибке не появилось");
     }
 }
