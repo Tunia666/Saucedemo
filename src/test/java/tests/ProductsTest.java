@@ -56,10 +56,10 @@ public class ProductsTest extends BaseTest {
     @Issue("www.jira.com/ITM-10")
     public void checkAddProductPage() {
         loginPage.open();
-        loginPage.login("standard_user", "secret_sauce");
-        productsPage.goToProductPage("Sauce Labs Bike Light");
-        productsPage.addToCartInProductPage("Sauce Labs Bike Light");
-        productsPage.shopping();
+        loginPage.login("standard_user", "secret_sauce")
+                .goToProductPage("Sauce Labs Bike Light")
+                .addToCartInProductPage("Sauce Labs Bike Light")
+                .shopping();
         assertEquals(productsPage.countProducts(), "1", "Количество товара не равно 2м");
     }
 

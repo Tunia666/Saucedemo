@@ -41,31 +41,37 @@ public class ProductsPage {
 
     //переход в корзину
     @Step("Нажатие на кнопку корзины")
-    public void shopping() {
+    public ProductsPage shopping() {
         driver.findElement(shoppingCart).click();
+        return  this;
     }
 
     //добавление из списка продуктов
     @Step("Добавление в корзину товара с именем: {product}")
-    public void addToCartInProductPage(String product) {
+    public ProductsPage addToCartInProductPage(String product) {
         driver.findElement(By.xpath(String.format(addToCartInPage, product))).click();
+        return this;
     }
 
     //удаление продукта из списка
     @Step("Удаление товара с именем: {product}")
-    public void removeProduct(String product) {
+    public ProductsPage removeProduct(String product) {
         driver.findElement(By.xpath(String.format(removeProductPage, product))).click();
+        return this;
     }
 
     //удаление из корзины
     @Step("Удаление товара с именем: {product}")
-    public void removeProductCar(String product) {
+    public ProductsPage removeProductCar(String product) {
         driver.findElement(By.xpath(String.format(removeCar, product))).click();
+        return this;
     }
 
     //переход на страницу продукта
     @Step("Переход на страницу товара с именем: {product}")
-    public void goToProductPage(String product) {
+    public ProductsPage goToProductPage(String product) {
         driver.findElement(By.xpath(String.format(productPage, product))).click();
+        return this;
     }
+
 }
