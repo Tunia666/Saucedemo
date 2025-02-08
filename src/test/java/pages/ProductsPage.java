@@ -1,5 +1,6 @@
 package pages;
 
+import io.qameta.allure.Step;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -7,6 +8,8 @@ import org.openqa.selenium.support.ui.Select;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import static utils.AllureUtils.takeScreenshot;
 
 public class ProductsPage {
     WebDriver driver;
@@ -27,7 +30,7 @@ public class ProductsPage {
     public String getTitle() {
         return driver.findElement(title).getText();
     }
-
+    @Step("Добавление в корзину товара с именем: {product}")
     public void addToCart(String product) {
         driver.findElement(By.xpath(String.format(addToCartPattern, product))).click();
     }
@@ -37,27 +40,38 @@ public class ProductsPage {
     }
 
     //переход в корзину
-    public void shopping() {
+    @Step("Нажатие на кнопку корзины")
+    public ProductsPage shopping() {
         driver.findElement(shoppingCart).click();
+        return  this;
     }
 
     //добавление из списка продуктов
-    public void addToCartInProductPage(String product) {
+    @Step("Добавление в корзину товара с именем: {product}")
+    public ProductsPage addToCartInProductPage(String product) {
         driver.findElement(By.xpath(String.format(addToCartInPage, product))).click();
+        return this;
     }
 
     //удаление продукта из списка
-    public void removeProduct(String product) {
+    @Step("Удаление товара с именем: {product}")
+    public ProductsPage removeProduct(String product) {
         driver.findElement(By.xpath(String.format(removeProductPage, product))).click();
+        return this;
     }
 
     //удаление из корзины
-    public void removeProductCar(String product) {
+    @Step("Удаление товара с именем: {product}")
+    public ProductsPage removeProductCar(String product) {
         driver.findElement(By.xpath(String.format(removeCar, product))).click();
+        return this;
     }
 
     //переход на страницу продукта
-    public void goToProductPage(String product) {
+    @Step("Переход на страницу товара с именем: {product}")
+    public ProductsPage goToProductPage(String product) {
         driver.findElement(By.xpath(String.format(productPage, product))).click();
+        return this;
     }
+
 }
