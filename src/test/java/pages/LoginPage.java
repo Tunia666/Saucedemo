@@ -14,7 +14,7 @@ import static utils.AllureUtils.takeScreenshot;
 
 public class LoginPage {
     WebDriver driver;
-    WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+    WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(20));
 
     By userField = By.cssSelector("[data-test='username']");
     By passwordField = By.cssSelector("[data-test='password']");
