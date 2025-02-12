@@ -14,7 +14,7 @@ import static utils.AllureUtils.takeScreenshot;
 
 public class LoginPage {
     WebDriver driver;
-    WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(20));
+    WebDriverWait wait;
 
     By userField = By.cssSelector("[data-test='username']");
     By passwordField = By.cssSelector("[data-test='password']");
@@ -23,6 +23,7 @@ public class LoginPage {
 
     public LoginPage(WebDriver driver) {
         this.driver = driver;
+        wait = new WebDriverWait(driver, Duration.ofSeconds(20));
     }
 
     public void isPageOpened(){
@@ -32,6 +33,7 @@ public class LoginPage {
     public void open() {
         driver.get("https://www.saucedemo.com/");
     }
+
     @Step("Вход в систему с логином {user} и паролем {password}")
     public ProductsPage login(String user, String password) {
         wait.until(ExpectedConditions.visibilityOfElementLocated(userField));

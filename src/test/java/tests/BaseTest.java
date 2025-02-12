@@ -20,19 +20,24 @@ public class BaseTest {
     LoginPage loginPage;
     ProductsPage productsPage;
 
-    @Parameters({"browser"})
+    @Parameters({"browser", "headless"})
     @BeforeMethod
-    public void setup(@Optional("chrome") String browser) {
+    public void setup(@Optional("chrome") String browser, @Optional("true") String headless) {
+        boolean isHeadless = Boolean.parseBoolean(headless);
         if (browser.equalsIgnoreCase("chrome")) {
             ChromeOptions options = new ChromeOptions();
-            options.addArguments("--headless");
-            options.addArguments("--disable-gpu");
-            options.addArguments("--window-size=1920x1080");
+            if (isHeadless) {
+                options.addArguments("--headless");
+                options.addArguments("--disable-gpu");
+                options.addArguments("--window-size=1920x1080");
+            }
             driver = new ChromeDriver(options);
             driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
         } else if (browser.equalsIgnoreCase("firefox")) {
             FirefoxOptions options = new FirefoxOptions();
-            options.addArguments("--headless");
+            if (isHeadless) {
+                options.addArguments("--headless");
+            }
             driver = new FirefoxDriver(options);
         }
         loginPage = new LoginPage(driver);
