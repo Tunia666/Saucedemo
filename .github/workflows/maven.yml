@@ -6,20 +6,18 @@
 # separate terms of service, privacy policy, and support
 # documentation.
 
-name: SouceDemoHSE
+name: SauceDemoHSE
 
 on:
   push:
     branches: [ "master" ]
   pull_request:
     branches: [ "master" ]
-  schedule:
-    - cron: 0 10 * * 5
 
 jobs:
   build:
 
-    runs-on: windows-latest
+    runs-on: ubuntu-latest
 
     steps:
       - uses: actions/checkout@v4
@@ -29,7 +27,7 @@ jobs:
           java-version: '17'
           distribution: 'temurin'
           cache: maven
-      - name: Setup brower
+      - name: Setup browser
         uses: abhi1693/setup-browser@v0.3.4
         with:
           browser: firefox

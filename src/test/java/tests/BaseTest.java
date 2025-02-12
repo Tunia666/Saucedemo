@@ -7,7 +7,6 @@ import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.firefox.FirefoxOptions;
 import org.testng.ITestResult;
 import org.testng.annotations.*;
-import pages.CartPage;
 import pages.LoginPage;
 import pages.ProductsPage;
 import utils.AllureUtils;
@@ -21,25 +20,19 @@ public class BaseTest {
     LoginPage loginPage;
     ProductsPage productsPage;
 
-    @Parameters({"browser", "headless"})
+    @Parameters({"browser"})
     @BeforeMethod
-    public void setup(@Optional("chrome") String browser, @Optional("true") String headless) {
-        boolean isHeadless = Boolean.parseBoolean(headless);
-
+    public void setup(@Optional("chrome") String browser) {
         if (browser.equalsIgnoreCase("chrome")) {
             ChromeOptions options = new ChromeOptions();
-            if (isHeadless) {
-                options.addArguments("--headless");
-                options.addArguments("--disable-gpu");
-                options.addArguments("--window-size=1920x1080");
-            }
+            options.addArguments("--headless");
+            options.addArguments("--disable-gpu");
+            options.addArguments("--window-size=1920x1080");
             driver = new ChromeDriver(options);
             driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
         } else if (browser.equalsIgnoreCase("firefox")) {
             FirefoxOptions options = new FirefoxOptions();
-            if (isHeadless) {
-                options.addArguments("--headless");
-            }
+            options.addArguments("--headless");
             driver = new FirefoxDriver(options);
         }
         loginPage = new LoginPage(driver);
