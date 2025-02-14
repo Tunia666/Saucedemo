@@ -19,6 +19,8 @@ public class BaseTest {
     WebDriver driver;
     LoginPage loginPage;
     ProductsPage productsPage;
+    String user = System.getProperty("user");
+    String password = System.getProperty("password");
 
     @Parameters({"browser", "headless"})
     @BeforeMethod
@@ -42,6 +44,9 @@ public class BaseTest {
         }
         loginPage = new LoginPage(driver);
         productsPage = new ProductsPage(driver);
+
+        System.out.println(System.getProperty("user"));
+        System.out.println(System.getProperty("password"));
     }
 
     @AfterMethod(alwaysRun = true)

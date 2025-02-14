@@ -11,7 +11,7 @@ public class LoginTest extends BaseTest {
             retryAnalyzer = Retry.class, groups = {"smoke"},alwaysRun = true)
     public void checkingLoginWithCorrectUsernameAndPassword() {
         loginPage.open();
-        loginPage.login("standard_user", "secret_sauce");
+        loginPage.login(user, password);
         assertEquals(productsPage.getTitle(),
                 "Products",
                 "Логин не выполнен");
@@ -20,8 +20,8 @@ public class LoginTest extends BaseTest {
     @DataProvider(name = "LoginData")
     public Object[][] loginData() {
         return new Object[][]{
-                {"standard_user", "12345", "Epic sadface: Username and password do not match any user in this service"},
-                {"name_user", "secret_sauce", "Epic sadface: Username and password do not match any user in this service"},
+                {user, "12345", "Epic sadface: Username and password do not match any user in this service"},
+                {"name_user", password, "Epic sadface: Username and password do not match any user in this service"},
         };
     }
     @Test(testName = "Проверка негативного логина и пароля", description = "Тестирование некорректного логина или пароля",
